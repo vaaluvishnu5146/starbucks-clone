@@ -1,0 +1,53 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Featured Blonde - Single-Origin Ethiopia",
+      "price": 250,
+      "menuType": "hot drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_DecafPikePlaceRoast.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 2,
+      "name": "Caffè Misto",
+      "price": 250,
+      "menuType": "hot drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaffeMisto.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 3,
+      "name": "Caffè Americano",
+      "price": 250,
+      "menuType": "hot drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/CaffeAmericano.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 4,
+      "name": "Cappuccino",
+      "price": 250,
+      "menuType": "hot drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/Cappuccino.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 5,
+      "name": "Caffè Mocha",
+      "price": 250,
+      "menuType": "hot drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/SBX20220607_CaffeMocha.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 6,
+      "name": "Cold brew",
+      "price": 250,
+      "menuType": "cold drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/ColdBrew.jpg?impolicy=1by1_tight_288"
+    },
+    {
+      "id": 7,
+      "name": "Chocolate hazzlenut -  Cookie cold brew",
+      "price": 250,
+      "menuType": "cold drink",
+      "image": "https://globalassets.starbucks.com/digitalassets/products/bev/ChocolateHazelnutColdBrew.jpg?impolicy=1by1_tight_288"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+:root {
+  --primary: #00754a;
+  --white: #ffffff;
+}
+
+html {
+  width: 560px;
+  max-width: 100%;
+  margin: 0px auto;
+}
+
+body {
+  font-family: "Bebas Neue", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+}
+
+.cart {
+  .count-bubble {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 10px;
+    color: var(--white);
+  }
+}
