@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "./components/Header/Header";
 import ListItem from "./components/ListItem/ListItem";
 import CartModal from "./components/Modal/CartModal";
@@ -7,10 +7,12 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const cartTotal = useMemo(() => calculateCartQuantity(cart), [cart]);
 
-  function calculateCartQuantity() {
+  function calculateCartQuantity(items = []) {
+    console.log("dasdasdsad");
     let totalCartPrice = 0;
-    cart.forEach((item) => {
+    items.forEach((item) => {
       totalCartPrice += item.price * item.quantity;
     });
     return totalCartPrice;
@@ -88,7 +90,7 @@ function App() {
           toggle={toggle}
           items={cart}
           quantityChange={handleCartQuantity}
-          totalCartPrice={calculateCartQuantity()}
+          totalCartPrice={cartTotal}
         />
       </div>
     </>
