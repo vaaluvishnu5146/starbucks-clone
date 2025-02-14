@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Header from "./components/Header/Header";
 import ListItem from "./components/ListItem/ListItem";
 import CartModal from "./components/Modal/CartModal";
@@ -8,15 +8,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const cartTotal = useMemo(() => calculateCartQuantity(cart), [cart]);
-
-  function calculateCartQuantity(items = []) {
-    console.log("dasdasdsad");
-    let totalCartPrice = 0;
-    items.forEach((item) => {
-      totalCartPrice += item.price * item.quantity;
-    });
-    return totalCartPrice;
-  }
+  const toggleModal = useCallback(() => toggle(), []);
 
   useEffect(() => {
     fetch("http://localhost:5173/products.json")
@@ -32,6 +24,14 @@ function App() {
         console.log(e);
       });
   }, []);
+
+  function calculateCartQuantity(items = []) {
+    let totalCartPrice = 0;
+    items.forEach((item) => {
+      totalCartPrice += item.price * item.quantity;
+    });
+    return totalCartPrice;
+  }
 
   function handleAddToCart(e, data = {}) {
     e.stopPropagation();
@@ -71,7 +71,7 @@ function App() {
 
   return (
     <>
-      <Header length={cart.length} cartToggle={toggle} />
+      <Header length={cart.length} cartToggle={toggleModal} />
       <div className="px-2">
         <div className="mb-5"></div>
         <h1 className="mb-3">WELCOME TO STAR BUCKS</h1>

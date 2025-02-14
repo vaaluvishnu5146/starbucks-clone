@@ -1,8 +1,9 @@
 import { Navbar, NavbarBrand } from "reactstrap";
 import logo from "../../assets/starbuckslogo.webp";
 import Cart from "../../assets/cart.svg";
+import { memo } from "react";
 
-export default function Header({ length = 0, cartToggle = () => {} }) {
+function Header({ length = 0, cartToggle = () => {} }) {
   return (
     <Navbar className="" color="dark" dark>
       <NavbarBrand href="/">
@@ -29,6 +30,8 @@ export default function Header({ length = 0, cartToggle = () => {} }) {
     </Navbar>
   );
 }
+
+export default memo(Header);
 
 Header.propTypes = {
   length: Number,
