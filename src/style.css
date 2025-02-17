@@ -33,3 +33,9 @@ p {
     color: var(--white);
   }
 }
+
+
+.logo {
+  width: 150px;
+  height: 150px;
+}

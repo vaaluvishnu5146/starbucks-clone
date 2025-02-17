@@ -2,11 +2,12 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import logo from "../../assets/starbuckslogo.webp";
 import Cart from "../../assets/cart.svg";
 import { memo } from "react";
-
+import { Link } from "react-router-dom";
 function Header({ length = 0, cartToggle = () => {} }) {
   return (
     <Navbar className="" color="dark" dark>
-      <NavbarBrand href="/">
+      <Link to="/">
+        <NavbarBrand>
         <img
           alt="starbucks"
           src={logo}
@@ -15,18 +16,21 @@ function Header({ length = 0, cartToggle = () => {} }) {
             width: 60,
           }}
         />
-      </NavbarBrand>
-      <div className="cart" onClick={cartToggle}>
-        <span className="count-bubble text-center">{length}</span>
-        <img
-          alt="cart"
-          src={Cart}
-          style={{
-            height: 35,
-            width: 35,
-          }}
-        />
-      </div>
+    </NavbarBrand>
+      </Link>
+      <Link to="/cart">
+      <div className="cart">
+      <span className="count-bubble text-center">{length}</span>
+      <img
+        alt="cart"
+        src={Cart}
+        style={{
+          height: 35,
+          width: 35,
+        }}
+      />
+    </div>
+      </Link>
     </Navbar>
   );
 }
