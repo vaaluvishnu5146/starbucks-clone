@@ -4,6 +4,7 @@ import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import PageNotFound from "./pages/404/404";
+import Posts from "./pages/Posts/Posts";
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
             <Route path="/login" Component={Login} />
             <Route path="/signup" Component={Signup} />
             <Route path="/" Component={Home} />
-            <Route path="/cart" Component={Cart} />
+            <Route path="/cart" Component={() => <Cart />} />
+            <Route path="/posts" Component={() => <Posts />} />
             <Route path="*" Component={PageNotFound} />
     </Routes>
      </div>
