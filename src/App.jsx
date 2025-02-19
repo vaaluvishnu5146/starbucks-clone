@@ -1,29 +1,14 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Header from "./components/Header/Header";
-import ListItem from "./components/ListItem/ListItem";
 import CartModal from "./components/Modal/CartModal";
+import TotalProducts from "./components/TotalProducts";
+import ProductsList from "./components/ProductsList/ProductsList";
 
 function App() {
-  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const cartTotal = useMemo(() => calculateCartQuantity(cart), [cart]);
   const toggleModal = useCallback(() => toggle(), []);
-
-  useEffect(() => {
-    fetch("http://localhost:5173/products.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        if (result && result.products) {
-          setProducts(result.products);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
 
   function calculateCartQuantity(items = []) {
     let totalCartPrice = 0;
@@ -71,20 +56,12 @@ function App() {
 
   return (
     <>
+      <TotalProducts />
       <Header length={cart.length} cartToggle={toggleModal} />
       <div className="px-2">
         <div className="mb-5"></div>
         <h1 className="mb-3">WELCOME TO STAR BUCKS</h1>
-        <div>
-          {products.map((p, index) => (
-            <ListItem
-              key={`${p.name}-${index}`}
-              data={p}
-              addToCart={handleAddToCart}
-              disabled={isAddedToCart(cart, p)}
-            />
-          ))}
-        </div>
+        <ProductsList cart={cart}  handleAddToCart={handleAddToCart} isAddedToCart={isAddedToCart} />
         <CartModal
           isOpen={cartOpen}
           toggle={toggle}
