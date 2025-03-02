@@ -11,7 +11,7 @@ export default function ProductsContextProvider({ children }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5173/products.json")
+        fetch(`${window.location.origin}/products.json`)
           .then((response) => {
             return response.json();
           })

@@ -1,7 +1,7 @@
 import { useProducts } from "../../context/ProductsContext";
 import ListItem from "../ListItem/ListItem";
 
-export default function ProductsList({ handleAddToCart = () => {}, isAddedToCart = () => {}, cart = [] }) {
+function ProductsList({ handleAddToCart = () => {}, isAddedToCart = () => {}, cart = [] }) {
    const { products = [] } =  useProducts()
   return (
     <div>
@@ -16,6 +16,8 @@ export default function ProductsList({ handleAddToCart = () => {}, isAddedToCart
             </div>
   )
 }
+
+export default ProductsList;
 
 ProductsList.propTypes = {
     handleAddToCart: Function,

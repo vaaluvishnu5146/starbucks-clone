@@ -56,7 +56,6 @@ function App() {
 
   return (
     <>
-      <TotalProducts />
       <Header length={cart.length} cartToggle={toggleModal} />
       <div className="px-2">
         <div className="mb-5"></div>
