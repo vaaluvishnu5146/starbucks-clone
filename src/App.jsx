@@ -1,20 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import Header from "./components/Header/Header";
 import ListItem from "./components/ListItem/ListItem";
 import CartModal from "./components/Modal/CartModal";
+import { appReducer } from "./reducers/AppReducer";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [cartValue, setCartValue] = useState(0);
+  const initialState = {
+    products: [],
+    cart: [],
+    cartOpen: false,
+    cartValue: 0,
+  };
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  const { products, cart, cartOpen, cartValue } = state;
 
   useEffect(() => {
     fetch("http://localhost:5173/products.json")
       .then((response) => response.json())
       .then((result) => {
         if (result) {
-          setProducts(result.products);
+          dispatch({ type: "products", value: result.products });
         }
       })
       .catch((error) => {
@@ -22,25 +27,21 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    const value = cart.reduce((a, b) => {
-      return a + b.price * b.quantity;
-    }, 0);
-    setCartValue(value);
-  }, [cart]);
-
   function toggle() {
-    setCartOpen((prev) => !prev);
+    dispatch({
+      type: "cartOpen",
+      value: !cartOpen,
+    });
   }
 
   function addToCart(e, data = {}) {
-    const dataEnriched = {
-      ...data,
-      quantity: 1,
-    };
-    const cartCopy = [...cart];
-    cartCopy.push(dataEnriched);
-    setCart(cartCopy);
+    dispatch({
+      type: "cart",
+      value: {
+        ...data,
+        quantity: 1,
+      },
+    });
   }
 
   function isItemAddedToCart(id) {
@@ -50,23 +51,12 @@ function App() {
   }
 
   function cartItemQuantityChange(e, type, id) {
-    let modifiedData = [];
-    if (type === "dec") {
-      modifiedData = cart.map((item) => {
-        if (item.id === id) {
-          item.quantity -= 1;
-        }
-        return item;
-      });
-    } else {
-      modifiedData = cart.map((item) => {
-        if (item.id === id) {
-          item.quantity += 1;
-        }
-        return item;
-      });
-    }
-    setCart(modifiedData);
+    e.preventDefault();
+    dispatch({
+      type: "quantity",
+      do: type,
+      id,
+    });
   }
 
   return (
