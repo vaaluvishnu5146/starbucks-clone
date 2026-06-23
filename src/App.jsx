@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useEffect, useReducer, useMemo, useState } from "react";
 import Header from "./components/Header/Header";
 import ListItem from "./components/ListItem/ListItem";
 import CartModal from "./components/Modal/CartModal";
@@ -13,6 +13,9 @@ function App() {
   };
   const [state, dispatch] = useReducer(appReducer, initialState);
   const { products, cart, cartOpen, cartValue } = state;
+  const [length, setLength] = useState(100000000);
+  const val = useMemo(() => calculateValue(length), [length]);
+  console.log("Value", val);
 
   useEffect(() => {
     fetch("http://localhost:5173/products.json")
@@ -27,12 +30,20 @@ function App() {
       });
   }, []);
 
-  function toggle() {
+  function calculateValue(length = 0) {
+    console.log(length);
+    return Array.from({ length: length }, (_, index) => index + 1).reduce(
+      (a, b) => a + b
+    );
+  }
+
+  const toggle = useCallback(() => {
+    console.log(cartOpen);
     dispatch({
       type: "cartOpen",
       value: !cartOpen,
     });
-  }
+  }, [cartOpen]);
 
   function addToCart(e, data = {}) {
     dispatch({
@@ -62,6 +73,13 @@ function App() {
   return (
     <>
       <Header length={cart.length} cartToggle={toggle} />
+      <button
+        onClick={() => {
+          setLength(length + 1);
+        }}
+      >
+        Increment Value
+      </button>
       <div className="px-2">
         <div className="mb-5"></div>
         <h1 className="mb-3">WELCOME TO STAR BUCKS</h1>
